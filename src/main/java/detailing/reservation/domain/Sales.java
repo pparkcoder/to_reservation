@@ -17,7 +17,7 @@ public class Sales {
     @Column(name = "sales_id")
     private Long id;
 
-    @OneToOne(mappedBy = "sales")
+    @OneToOne(mappedBy = "sales", fetch = FetchType.LAZY)
     private Shop shop;
 
     private LocalDateTime reserveDate; // 매출발생 일자

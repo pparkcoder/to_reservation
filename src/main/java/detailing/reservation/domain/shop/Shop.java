@@ -19,7 +19,7 @@ public abstract class Shop {
     @Column(name = "shop_id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "sales_id")
     private Sales sales;
 
@@ -28,4 +28,10 @@ public abstract class Shop {
     private Address address;
     private int price;
     private int stockQuantity;
+
+    // 연관관계 메서드
+    public void setSales(Sales sales){
+        this.sales = sales;
+        sales.setShop(this);
+    }
 }

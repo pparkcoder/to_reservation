@@ -23,6 +23,6 @@ public class Member {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "member") // reserve 테이블에 있는 member 필드에 의해 매핑되었다는
+    @OneToMany(mappedBy = "member") // reserve 테이블에 있는 member 필드에 의해 매핑되었다는 뜻
     private List<Reserve> reserves = new ArrayList<>();
 }
