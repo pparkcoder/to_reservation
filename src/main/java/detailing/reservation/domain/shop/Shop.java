@@ -1,5 +1,6 @@
 package detailing.reservation.domain.shop;
 
+import detailing.exception.NotEnoughStockException;
 import detailing.reservation.domain.Address;
 import detailing.reservation.domain.Sales;
 import jakarta.persistence.*;
@@ -33,5 +34,25 @@ public abstract class Shop {
     public void setSales(Sales sales){
         this.sales = sales;
         sales.setShop(this);
+    }
+
+    // 비즈니스 로직
+    /**
+     * stock 증가
+     */
+    public void addStock(int quantity)
+    {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock 감소
+     */
+    public void removeStock(int quantity){
+        int resStock = this.stockQuantity - quantity;
+        if(resStock < 0){
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = resStock;
     }
 }
