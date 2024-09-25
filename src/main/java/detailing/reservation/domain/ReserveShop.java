@@ -2,12 +2,15 @@ package detailing.reservation.domain;
 
 import detailing.reservation.domain.shop.Shop;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReserveShop {
 
     @Id
