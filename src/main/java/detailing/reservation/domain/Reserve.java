@@ -40,4 +40,37 @@ public class Reserve {
         reserveShops.add(reserveShop);
         reserveShop.setReserve(this);
     }
+
+    // 생성 메서드
+    public static Reserve createReserve(Member member, ReserveShop... reserveShops){
+        Reserve reserve = new Reserve();
+        reserve.setMember(member);
+        for (ReserveShop reserveShop : reserveShops) {
+            reserve.addReserveShop(reserveShop);
+        }
+        reserve.setReserveDate(LocalDateTime.now());
+        reserve.setStatus(ReserveStatus.RESERVE);
+        return reserve;
+    }
+
+    /**
+     * 예약 취소
+     */
+    public void cancel(){
+        this.setStatus(ReserveStatus.CANCEL);
+        for (ReserveShop reserveShop : reserveShops){
+            reserveShop.cancel();
+        }
+    }
+
+    /**
+     * 결제 예정 금액 조회
+     */
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for (ReserveShop reserveShop : reserveShops){
+            totalPrice += reserveShop.getTotalPrice();
+        }
+        return totalPrice;
+    }
 }
