@@ -20,7 +20,7 @@ public class ShopService {
         shopRepository.save(shop);
     }
 
-    public List<Shop> findShop(){
+    public List<Shop> findShops(){
         return shopRepository.findAll();
     }
 
