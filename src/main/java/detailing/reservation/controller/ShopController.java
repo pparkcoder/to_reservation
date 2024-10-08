@@ -59,14 +59,16 @@ public class ShopController {
 
     @PostMapping("shops/{shopId}/edit")
     public String updateShop(@ModelAttribute("form") ShopForm form, @PathVariable("shopId") String shopId){
-        OpenShop shop = new OpenShop();
 
-        shop.setId(form.getId());
-        shop.setName(form.getName());
-        shop.setPrice(form.getPrice());
-        shop.setStockQuantity(form.getStockQuantity());
+//        OpenShop shop = new OpenShop();//
+//        shop.setId(form.getId());
+//        shop.setName(form.getName());
+//        shop.setPrice(form.getPrice());
+//        shop.setStockQuantity(form.getStockQuantity());
+//        shopService.saveShop(shop);
 
-        shopService.saveShop(shop);
+        // 변경 감지 적용
+        shopService.updateShop(form.getId(), form.getName(), form.getPrice(), form.getStockQuantity());
         return "redirect:/shops";
     }
 }

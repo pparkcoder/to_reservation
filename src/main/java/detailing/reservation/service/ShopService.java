@@ -20,6 +20,15 @@ public class ShopService {
         shopRepository.save(shop);
     }
 
+    // 변경 감지 적용
+    @Transactional
+    public Shop updateShop(Long shopId, String name, int price, int stockQuantity){
+        Shop findShop = shopRepository.findOne(shopId);
+        findShop.setName(name);
+        findShop.setPrice(price);
+        findShop.setStockQuantity(stockQuantity);
+        return findShop;
+    }
     public List<Shop> findShops(){
         return shopRepository.findAll();
     }
