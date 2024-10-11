@@ -2,6 +2,7 @@ package detailing.reservation.service;
 
 import detailing.reservation.domain.Member;
 import detailing.reservation.domain.Reserve;
+import detailing.reservation.domain.ReserveSearch;
 import detailing.reservation.domain.ReserveShop;
 import detailing.reservation.domain.shop.Shop;
 import detailing.reservation.repository.MemberRepository;
@@ -55,7 +56,7 @@ public class ReserveService {
     /**
      * 예약 조회
      */
-//    public List<Reserve> findReserves(ReserverSearch reserverSearch){
-//        return reserveRepository.findAll(reserverSearch);
-//    }
+    public List<Reserve> findReserves(ReserveSearch reserveSearch){
+        return reserveRepository.findAllByString(reserveSearch);
+    }
 }
