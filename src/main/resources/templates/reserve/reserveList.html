@@ -36,16 +36,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${reserves}">
-                <td th:text="${item.id}"></td>
-                <td th:text="${item.member.name}"></td>
-                <td th:text="${item.reserveShops[0].shop.name}"></td>
-                <td th:text="${item.reserveShops[0].reservePrice}"></td>
-                <td th:text="${item.reserveShops[0].reserveCount}"></td>
-                <td th:text="${item.status}"></td>
-                <td th:text="${item.reserveDate}"></td>
+            <tr th:each="reserve : ${reserves}">
+                <td th:text="${reserve.id}"></td>
+                <td th:text="${reserve.member.name}"></td>
+                <td th:text="${reserve.reserveShops[0].shop.name}"></td>
+                <td th:text="${reserve.reserveShops[0].reservePrice}"></td>
+                <td th:text="${reserve.reserveShops[0].reserveCount}"></td>
+                <td th:text="${reserve.status}"></td>
+                <td th:text="${reserve.reserveDate}"></td>
                 <td>
-                    <a th:if="${item.status.name() == 'RESERVE'}" href="#" th:href="'javascript:cancel('+${item.id}+')'" class="btn btn-danger">CANCEL</a>
+                    <a th:if="${reserve.status.name() == 'RESERVE'}" href="#" th:href="'javascript:cancel('+${reserve.id}+')'" class="btn btn-danger">CANCEL</a>
                 </td>
             </tr>
             </tbody>

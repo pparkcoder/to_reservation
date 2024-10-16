@@ -10,10 +10,7 @@ import detailing.reservation.service.ShopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,5 +47,11 @@ public class ReserveController {
         model.addAttribute("reserves", reserves);
 
         return "reserve/reserveList";
+    }
+
+    @PostMapping("/reserves/{reserveId}/cancel")
+    public String cancelReserve(@PathVariable("reserveId") Long reserveId){
+        reserveService.cancelReserve(reserveId);
+        return "redirect:/reserves";
     }
 }
