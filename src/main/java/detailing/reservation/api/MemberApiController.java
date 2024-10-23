@@ -25,7 +25,7 @@ public class MemberApiController {
     }
 
     @GetMapping("/api/v2/members")
-    public Result memberV2(){
+    public Result membersV2(){
         List<Member> findMembers = memberService.findMembers();
         List<MemberDto> collect = findMembers.stream()
                 .map(m -> new MemberDto(m.getName()))
@@ -60,7 +60,7 @@ public class MemberApiController {
     @Data
     @AllArgsConstructor
     static class Result<T> {
-        private int count;
+        int count;
         private T data;
     }
 
