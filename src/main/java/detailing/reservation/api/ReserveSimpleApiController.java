@@ -25,7 +25,7 @@ public class ReserveSimpleApiController {
     private final ReserveRepository reserveRepository;
 
     @GetMapping("/api/v1/simple-reserves")
-    public List<Reserve> reserveV1(){
+    public List<Reserve> reserve1(){
         List<Reserve> all = reserveRepository.findAllByString(new ReserveSearch());
         for (Reserve reserve : all) {
             reserve.getMember().getName(); // Lazy 강제 초기화
@@ -36,6 +36,15 @@ public class ReserveSimpleApiController {
     @GetMapping("/api/v2/simple-reserves")
     public List<SimpleReserveDto> reserveV2(){
         List<Reserve> reserves = reserveRepository.findAllByString(new ReserveSearch());
+        List<SimpleReserveDto> result = reserves.stream()
+                .map(r -> new SimpleReserveDto(r))
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    @GetMapping("/api/v3/simple-reserves")
+    public List<SimpleReserveDto> reserveV3(){
+        List<Reserve> reserves = reserveRepository.findAllWithMember();
         List<SimpleReserveDto> result = reserves.stream()
                 .map(r -> new SimpleReserveDto(r))
                 .collect(Collectors.toList());

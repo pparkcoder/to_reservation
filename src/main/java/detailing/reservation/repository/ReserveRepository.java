@@ -60,4 +60,11 @@ public class ReserveRepository {
         TypedQuery<Reserve> query = em.createQuery(cq).setMaxResults(1000); //최대 1000 건
         return query.getResultList();
     }
+
+    public List<Reserve> findAllWithMember() {
+        return em.createQuery(
+                "select r from Reserve r" +
+                        " join fetch r.member m", Reserve.class
+        ).getResultList();
+    }
 }
