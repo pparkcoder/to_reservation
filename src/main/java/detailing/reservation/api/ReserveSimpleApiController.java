@@ -5,6 +5,8 @@ import detailing.reservation.domain.Reserve;
 import detailing.reservation.domain.ReserveSearch;
 import detailing.reservation.domain.ReserveStatus;
 import detailing.reservation.repository.ReserveRepository;
+import detailing.reservation.repository.reserve.simplequery.ReserveSimpleQueryDto;
+import detailing.reservation.repository.reserve.simplequery.ReserveSimpleQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReserveSimpleApiController {
     private final ReserveRepository reserveRepository;
+    private final ReserveSimpleQueryRepository reserveSimpleQueryRepository;
 
     @GetMapping("/api/v1/simple-reserves")
     public List<Reserve> reserve1(){
@@ -49,6 +52,11 @@ public class ReserveSimpleApiController {
                 .map(r -> new SimpleReserveDto(r))
                 .collect(Collectors.toList());
         return result;
+    }
+
+    @GetMapping("/api/v4/simple-reserves")
+    public List<ReserveSimpleQueryDto> reserveV4(){
+        return reserveSimpleQueryRepository.findReserveDtos();
     }
 
     @Data
