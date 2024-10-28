@@ -1,5 +1,6 @@
 package detailing.reservation.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import detailing.reservation.domain.shop.Shop;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -18,6 +19,7 @@ public class ReserveShop {
     @Column(name = "reserve_shop_id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reserve_id") // FK 설정, 연관관계 주인
     private Reserve reserve;
