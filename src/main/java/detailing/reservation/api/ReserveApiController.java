@@ -38,6 +38,18 @@ public class ReserveApiController {
         return collect;
     }
 
+    @GetMapping("/api/v3/reserves")
+    public List<ReserveDto> reserveV3(){
+        List<Reserve> reserves = reserveRepository.findAllWithShop();
+
+        for (Reserve reserve : reserves) {
+            System.out.println("ref = " + reserve + " reserve.getId() = " + reserve.getId());
+        }
+        List<ReserveDto> collect = reserves.stream()
+                .map(r -> new ReserveDto(r))
+                .collect(Collectors.toList());
+        return collect;
+    }
     @Data
     static class ReserveDto{
 

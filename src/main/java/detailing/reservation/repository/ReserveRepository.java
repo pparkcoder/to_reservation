@@ -67,4 +67,13 @@ public class ReserveRepository {
                         " join fetch r.member m", Reserve.class
         ).getResultList();
     }
+
+    public List<Reserve> findAllWithShop() {
+        return em.createQuery(
+                "select distinct r from Reserve r" +
+                        " join fetch r.member" +
+                        " join fetch r.reserveShops rs" +
+                        " join fetch rs.shop s", Reserve.class)
+                .getResultList();
+    }
 }
