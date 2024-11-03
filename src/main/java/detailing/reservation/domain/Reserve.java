@@ -26,7 +26,6 @@ public class Reserve {
     @JoinColumn(name = "member_id") // FK 설정, 연관관계 주인
     private Member member;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "reserve", cascade = CascadeType.ALL)
     private List<ReserveShop> reserveShops = new ArrayList<>();
 

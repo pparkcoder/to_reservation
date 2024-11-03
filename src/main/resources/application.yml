@@ -12,6 +12,7 @@ spring:
       hibernate:
 #        show_sql: true #logger가 아닌 시스템 로그에 찍는 것이므로 사용하지 않음
         format_sql: true
+        default_batch_fetch_size: 100
 
 logging:
   level:

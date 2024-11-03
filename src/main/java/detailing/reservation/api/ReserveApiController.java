@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -42,9 +43,18 @@ public class ReserveApiController {
     public List<ReserveDto> reserveV3(){
         List<Reserve> reserves = reserveRepository.findAllWithShop();
 
-        for (Reserve reserve : reserves) {
-            System.out.println("ref = " + reserve + " reserve.getId() = " + reserve.getId());
-        }
+        List<ReserveDto> collect = reserves.stream()
+                .map(r -> new ReserveDto(r))
+                .collect(Collectors.toList());
+        return collect;
+    }
+
+    @GetMapping("/api/v3.1/reserves")
+    public List<ReserveDto> reserveV3_page(
+            @RequestParam(value = "offset", defaultValue = "0") int offset,
+            @RequestParam(value = "limit", defaultValue = "100") int limit) {
+        List<Reserve> reserves = reserveRepository.findAllWithMember(offset, limit);
+
         List<ReserveDto> collect = reserves.stream()
                 .map(r -> new ReserveDto(r))
                 .collect(Collectors.toList());

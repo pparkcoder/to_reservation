@@ -76,4 +76,13 @@ public class ReserveRepository {
                         " join fetch rs.shop s", Reserve.class)
                 .getResultList();
     }
+
+    public List<Reserve> findAllWithMember(int offset, int limit) {
+        return em.createQuery(
+                "select r from Reserve r" +
+                        " join fetch r.member m", Reserve.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
