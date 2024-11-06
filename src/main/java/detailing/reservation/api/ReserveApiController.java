@@ -2,6 +2,7 @@ package detailing.reservation.api;
 
 import detailing.reservation.domain.*;
 import detailing.reservation.repository.ReserveRepository;
+import detailing.reservation.repository.reserve.query.ReserveFlatDto;
 import detailing.reservation.repository.reserve.query.ReserveQueryDto;
 import detailing.reservation.repository.reserve.query.ReserveQueryRepository;
 import lombok.Data;
@@ -71,6 +72,11 @@ public class ReserveApiController {
     @GetMapping("/api/v5/reserves")
     public List<ReserveQueryDto> reserveV5(){
         return reserveQueryRepository.findAllByDto_optimization();
+    }
+
+    @GetMapping("/api/v6/reserves")
+    public List<ReserveFlatDto> reserveV6(){
+        return reserveQueryRepository.findAllByDto_flat();
     }
 
 

@@ -13,7 +13,8 @@ import java.util.stream.Collectors;
 public class ReserveQueryRepository {
 
     private final EntityManager em;
-    
+
+    // v4에서 사용
     public List<ReserveQueryDto> findReserveQueryDtos(){
         List<ReserveQueryDto> result = findReserves();
         result.forEach(r -> {
@@ -23,6 +24,7 @@ public class ReserveQueryRepository {
         return result;
     }
 
+    // v5에서 사용
     public List<ReserveQueryDto> findAllByDto_optimization() {
         List<ReserveQueryDto> result = findReserves();
 
@@ -69,6 +71,18 @@ public class ReserveQueryRepository {
                 "select new detailing.reservation.repository.reserve.query.ReserveQueryDto(r.id, m.name, r.reserveDate, r.status, m.address)" +
                         " from Reserve r" +
                         " join r.member m", ReserveQueryDto.class)
+                .getResultList();
+    }
+
+    // v6에서 사용
+    public List<ReserveFlatDto> findAllByDto_flat() {
+        return em.createQuery(
+                "select new "+
+                        "detailing.reservation.repository.reserve.query.ReserveFlatDto(r.id, m.name, r.reserveDate, r.status, m.address, s.name, rs.reservePrice, rs.reserveCount)" +
+                        " from Reserve r" +
+                        " join r.member m" +
+                        " join r.reserveShops rs" +
+                        " join rs.shop s", ReserveFlatDto.class)
                 .getResultList();
     }
 }
