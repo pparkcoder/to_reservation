@@ -2,8 +2,9 @@ package detailing.reservation.api;
 
 import detailing.reservation.domain.*;
 import detailing.reservation.repository.ReserveRepository;
+import detailing.reservation.repository.reserve.query.ReserveQueryDto;
+import detailing.reservation.repository.reserve.query.ReserveQueryRepository;
 import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class ReserveApiController {
 
     private final ReserveRepository reserveRepository;
+    private final ReserveQueryRepository reserveQueryRepository;
 
     @GetMapping("/api/v1/reserves")
     public List<Reserve> reserveV1(){
@@ -60,6 +62,12 @@ public class ReserveApiController {
                 .collect(Collectors.toList());
         return collect;
     }
+
+    @GetMapping("/api/v4/reserves")
+    public List<ReserveQueryDto> reserveV4(){
+        return reserveQueryRepository.findReserveQueryDtos();
+    }
+
     @Data
     static class ReserveDto{
 
