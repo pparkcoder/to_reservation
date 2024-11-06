@@ -68,6 +68,12 @@ public class ReserveApiController {
         return reserveQueryRepository.findReserveQueryDtos();
     }
 
+    @GetMapping("/api/v5/reserves")
+    public List<ReserveQueryDto> reserveV5(){
+        return reserveQueryRepository.findAllByDto_optimization();
+    }
+
+
     @Data
     static class ReserveDto{
 
