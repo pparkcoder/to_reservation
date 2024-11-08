@@ -1,7 +1,7 @@
 package detailing.reservation.service;
 
 import detailing.reservation.domain.Member;
-import detailing.reservation.repository.MemberRepository;
+import detailing.reservation.repository.MemberRepositoryOld;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class MemberServiceTest {
 
     @Autowired
-    MemberRepository memberRepository;
+    MemberRepositoryOld memberRepositoryOld;
     @Autowired
     MemberService memberService;
 
@@ -30,7 +30,7 @@ public class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         // then
-        assertEquals(member, memberRepository.findOne(savedId));
+        assertEquals(member, memberRepositoryOld.findOne(savedId));
     }
 
     @Test(expected = IllegalStateException.class)

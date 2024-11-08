@@ -28,7 +28,7 @@ public class ReserveService {
     @Transactional
     public Long reserve(Long memberId, Long shopId, int count){
         // 엔티티 조회
-        Member member = memberRepository.findOne(memberId);
+        Member member = memberRepository.findById(memberId).get();
         Shop shop = shopRepository.findOne(shopId);
 
         // 예약업체 생성
